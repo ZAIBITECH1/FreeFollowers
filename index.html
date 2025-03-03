@@ -107,17 +107,6 @@
             <option value="email">Email</option>
         </select>
 
-        <select id="countryCode" class="hidden">
-            <option value="+1">🇺🇸 +1 (USA)</option>
-            <option value="+44">🇬🇧 +44 (UK)</option>
-            <option value="+91">🇮🇳 +91 (India)</option>
-            <option value="+61">🇦🇺 +61 (Australia)</option>
-            <option value="+92">🇵🇰 +92 (Pakistan)</option>
-            <option value="+81">🇯🇵 +81 (Japan)</option>
-            <option value="+49">🇩🇪 +49 (Germany)</option>
-            <option value="+33">🇫🇷 +33 (France)</option>
-        </select>
-
         <input type="text" id="contactInfo" placeholder="Enter Phone Number or Email" class="hidden">
         <input type="text" id="firstName" placeholder="First Name">
         <input type="text" id="lastName" placeholder="Last Name">
@@ -150,17 +139,7 @@
         }
 
         function toggleContactField() {
-            let type = document.getElementById("contactType").value;
             let contactField = document.getElementById("contactInfo");
-            let countryCode = document.getElementById("countryCode");
-
-            if (type === "phone") {
-                contactField.placeholder = "Enter Phone Number";
-                countryCode.classList.remove("hidden");
-            } else {
-                contactField.placeholder = "Enter Email";
-                countryCode.classList.add("hidden");
-            }
             contactField.classList.remove("hidden");
         }
 
@@ -170,18 +149,36 @@
             let quantity = document.getElementById("quantity").value;
             let contactType = document.getElementById("contactType").value;
             let contactInfo = document.getElementById("contactInfo").value.trim();
-            let countryCode = document.getElementById("countryCode").value;
             let firstName = document.getElementById("firstName").value.trim();
             let lastName = document.getElementById("lastName").value.trim();
 
-            let finalContact = (contactType === "phone") ? `${countryCode} ${contactInfo}` : contactInfo;
+            // Prevent empty submissions
+            if (!platform || !serviceType || !quantity || !contactType || !contactInfo || !firstName || !lastName) {
+                alert("❌ Please fill in all fields before submitting.");
+                return;
+            }
 
-            let requestBody = { platform, serviceType, quantity, contact: finalContact, firstName, lastName };
+            // Format contact info properly
+            let finalContact = contactType === "phone" ? contactInfo : contactInfo;
+
+            let requestBody = { 
+                platform, 
+                serviceType, 
+                quantity, 
+                contact: finalContact, 
+                firstName, 
+                lastName 
+            };
 
             console.log("Sending Data:", requestBody); // Debugging
 
             document.getElementById("loading").style.display = "block";
-            let response = await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(requestBody) });
+            let response = await fetch(workerURL, { 
+                method: "POST", 
+                headers: { "Content-Type": "application/json" }, 
+                body: JSON.stringify(requestBody) 
+            });
+
             document.getElementById("loading").style.display = "none";
             document.getElementById("successMessage").style.display = "block";
         }
