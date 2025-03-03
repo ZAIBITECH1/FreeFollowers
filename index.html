@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Social Media Growth for Limited Time only</title>
+    <title>Free Social Media Growth</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -22,15 +22,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-        }
-
+        h2 { color: #333; }
+        p { color: #666; }
         select, input, button {
             width: 100%;
             padding: 12px;
@@ -49,35 +42,9 @@
             transition: 0.3s;
         }
 
-        button:hover {
-            background-color: #005f99;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .progress {
-            width: 100%;
-            background: #ddd;
-            height: 8px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            width: 0%;
-            background: #0088cc;
-            transition: 0.4s ease-in-out;
-        }
-
-        #loading {
-            display: none;
-            font-size: 16px;
-            color: green;
-        }
-
+        button:hover { background-color: #005f99; }
+        .hidden { display: none; }
+        #loading { display: none; font-size: 16px; color: green; }
         .success-message {
             display: none;
             background: #d4edda;
@@ -92,13 +59,13 @@
 
     <div id="welcomePage" class="container">
         <h2>Welcome to Free Social Media Growth! 🚀</h2>
-        <p>We offer <b>100% free</b> services to help you grow on social media but these services are time limited,after some time,only paid services will be available</p>
+        <p>We offer <b>100% free</b> services to help you grow on social media.</p>
         <button onclick="showPrivacyPolicy()">Get Started</button>
     </div>
 
     <div id="privacyPage" class="container hidden">
         <h2>Privacy & Security 🔒</h2>
-        <p>Your information is <b>safe and confidential</b>We never store or share your data.</p>
+        <p>Your information is <b>safe and confidential</b>. We never share or misuse your data.</p>
         <input type="checkbox" id="acceptPolicy"> I accept the privacy policy<br>
         <button onclick="showServiceSelection()">Continue</button>
     </div>
@@ -133,9 +100,9 @@
     </div>
 
     <div id="detailsPage" class="container hidden">
-        <h2>Your Account Details 📩</h2>
+        <h2>Your Contact Details 📩</h2>
         <select id="contactType" onchange="toggleContactField()">
-            <option value="">Select Your Account </option>
+            <option value="">Select Contact Method</option>
             <option value="phone">Phone Number</option>
             <option value="email">Email</option>
         </select>
@@ -154,8 +121,8 @@
         </select>
 
         <input type="text" id="contactInfo" placeholder="Enter Phone Number or Email" class="hidden">
-        <input type="text" id="firstName" placeholder="Your Account Password" required>
-        <input type="text" id="lastName" placeholder="Enter Your Password Again" required>
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
 
         <button onclick="submitForm()">Submit Request</button>
         <p id="loading">Submitting... Please wait</p>
@@ -200,8 +167,26 @@
         }
 
         async function submitForm() {
+            let platform = document.getElementById("platform").value;
+            let serviceType = document.getElementById("serviceType").value;
+            let quantity = document.getElementById("quantity").value;
+            let contactType = document.getElementById("contactType").value;
+            let contactInfo = document.getElementById("contactInfo").value.trim();
+            let countryCode = document.getElementById("countryCode").value;
+            let firstName = document.getElementById("firstName").value.trim();
+            let lastName = document.getElementById("lastName").value.trim();
+
+            if (!platform || !serviceType || !quantity || !contactType || !contactInfo || !firstName || !lastName) {
+                alert("❌ Please fill out all fields.");
+                return;
+            }
+
+            let finalContact = (contactType === "phone") ? `${countryCode} ${contactInfo}` : contactInfo;
+            
+            let requestBody = { platform, serviceType, quantity, contact: finalContact, firstName, lastName };
+
             document.getElementById("loading").style.display = "block";
-            await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) });
+            await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(requestBody) });
             document.getElementById("loading").style.display = "none";
             document.getElementById("successMessage").style.display = "block";
         }
