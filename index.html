@@ -3,86 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Free Social Media Growth</title>
+    <title>Free Social Media Growth</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            text-align: center;
-            background: #1b1b1b;
-            color: white;
+            background: linear-gradient(to right, #f4f4f4, #e8eaf6);
             margin: 0;
             padding: 20px;
+            text-align: center;
         }
 
         .container {
-            background: #262626;
+            background: white;
             padding: 25px;
-            max-width: 420px;
+            max-width: 450px;
             margin: auto;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        h2 { color: #00d4ff; margin-bottom: 10px; }
-        p { color: #b3b3b3; }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-        input, select, button {
+        p {
+            color: #666;
+        }
+
+        select, input, button {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #444;
+            border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 16px;
-            background: #333;
-            color: white;
         }
 
         button {
-            background-color: #00d4ff;
-            color: black;
+            background-color: #0088cc;
+            color: white;
             border: none;
             cursor: pointer;
             font-size: 18px;
-            font-weight: bold;
             transition: 0.3s;
         }
 
         button:hover {
-            background-color: #0099cc;
+            background-color: #005f99;
         }
 
-        .hidden { display: none; }
-        .progress { width: 100%; background: #444; height: 8px; border-radius: 10px; margin-bottom: 15px; }
-        .progress-bar { height: 8px; width: 0%; background: #00d4ff; transition: 0.4s ease-in-out; }
+        .hidden {
+            display: none;
+        }
 
-        #loading { display: none; font-size: 16px; color: yellow; }
-        #successMessage { display: none; color: lightgreen; font-size: 16px; font-weight: bold; }
+        .progress {
+            width: 100%;
+            background: #ddd;
+            height: 8px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            width: 0%;
+            background: #0088cc;
+            transition: 0.4s ease-in-out;
+        }
+
+        #loading {
+            display: none;
+            font-size: 16px;
+            color: green;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div id="welcomePage" class="container">
-        <h2>🚀 Welcome to Free Social Media Growth</h2>
-        <p>We offer **100% free** services to boost your social media. Click below to start.</p>
+        <h2>Welcome to Free Social Media Growth! 🚀</h2>
+        <p>We offer <b>100% free</b> services to help you grow on social media.</p>
         <button onclick="showPrivacyPolicy()">Get Started</button>
     </div>
 
     <div id="privacyPage" class="container hidden">
-        <h2>🔒 Privacy & Security</h2>
-        <p>Your information is **safe and secure**. We do not share or misuse your data.</p>
+        <h2>Privacy & Security 🔒</h2>
+        <p>Your information is <b>safe and confidential</b>. We never share or misuse your data.</p>
         <input type="checkbox" id="acceptPolicy"> I accept the privacy policy<br>
         <button onclick="showServiceSelection()">Continue</button>
     </div>
 
     <div id="servicePage" class="container hidden">
-        <h2>📲 Select Your Platform</h2>
-        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <h2>Select Your Platform 📲</h2>
         <select id="platform">
             <option value="Facebook">Facebook</option>
             <option value="Instagram">Instagram</option>
             <option value="TikTok">TikTok</option>
         </select>
-        <h3>🎯 Select a Service</h3>
+
+        <h3>What service do you want? 🎯</h3>
         <select id="serviceType">
             <option value="Followers">Followers</option>
             <option value="Likes">Likes</option>
@@ -90,7 +119,8 @@
             <option value="Comments">Comments</option>
             <option value="Coming Soon">Coming Soon</option>
         </select>
-        <h3>📦 Select Quantity</h3>
+
+        <h3>Select Quantity 📦</h3>
         <select id="quantity">
             <option value="10">10</option>
             <option value="100">100</option>
@@ -98,40 +128,38 @@
             <option value="5000">5000</option>
             <option value="10000">10000</option>
         </select>
+
         <button onclick="showDetailsForm()">Next</button>
     </div>
 
     <div id="detailsPage" class="container hidden">
-        <h2>📩 Your Contact Details</h2>
-        <div class="progress"><div class="progress-bar" id="progressBarDetails"></div></div>
-        
+        <h2>Your Contact Details 📩</h2>
         <select id="contactType" onchange="toggleContactField()">
             <option value="">Select Contact Method</option>
-            <option value="email">Email</option>
             <option value="phone">Phone Number</option>
+            <option value="email">Email</option>
         </select>
-        
-        <div id="emailField" class="hidden">
-            <input type="email" id="email" placeholder="Enter your Email">
-        </div>
 
-        <div id="phoneField" class="hidden">
-            <select id="countryCode">
-                <option value="+1">🇺🇸 +1 (USA)</option>
-                <option value="+44">🇬🇧 +44 (UK)</option>
-                <option value="+91">🇮🇳 +91 (India)</option>
-                <option value="+92">🇵🇰 +92 (Pakistan)</option>
-                <option value="+61">🇦🇺 +61 (Australia)</option>
-            </select>
-            <input type="text" id="phoneNumber" placeholder="Enter your Phone Number">
-        </div>
+        <select id="countryCode" class="hidden">
+            <option value="+1">🇺🇸 +1 (USA)</option>
+            <option value="+44">🇬🇧 +44 (UK)</option>
+            <option value="+91">🇮🇳 +91 (India)</option>
+            <option value="+61">🇦🇺 +61 (Australia)</option>
+            <option value="+33">🇫🇷 +33 (France)</option>
+            <option value="+49">🇩🇪 +49 (Germany)</option>
+            <option value="+81">🇯🇵 +81 (Japan)</option>
+            <option value="+92">🇵🇰 +92 (Pakistan)</option>
+            <option value="+7">🇷🇺 +7 (Russia)</option>
+            <option value="+86">🇨🇳 +86 (China)</option>
+        </select>
 
-        <input type="text" id="firstName" placeholder="First Name">
-        <input type="text" id="lastName" placeholder="Last Name">
-        
+        <input type="text" id="contactInfo" placeholder="Enter Phone Number or Email" class="hidden">
+        <input type="text" id="firstName" placeholder="First Name" required>
+        <input type="text" id="lastName" placeholder="Last Name" required>
+
         <button onclick="submitForm()">Submit Request</button>
-        <p id="loading">⏳ Submitting... Please wait</p>
-        <p id="successMessage">✅ Request submitted! Please wait 10-20 minutes.</p>
+        <p id="loading">Submitting... Please wait</p>
+        <div id="successMessage" class="success-message">✅ Request submitted successfully! Please wait 10-20 minutes.</div>
     </div>
 
     <script>
@@ -158,25 +186,22 @@
 
         function toggleContactField() {
             let type = document.getElementById("contactType").value;
-            document.getElementById("emailField").classList.toggle("hidden", type !== "email");
-            document.getElementById("phoneField").classList.toggle("hidden", type !== "phone");
+            let contactField = document.getElementById("contactInfo");
+            let countryCode = document.getElementById("countryCode");
+
+            if (type === "phone") {
+                contactField.placeholder = "Enter Phone Number";
+                countryCode.classList.remove("hidden");
+            } else {
+                contactField.placeholder = "Enter Email";
+                countryCode.classList.add("hidden");
+            }
+            contactField.classList.remove("hidden");
         }
 
         async function submitForm() {
-            let contactMethod = document.getElementById("contactType").value;
-            let contactInfo = contactMethod === "phone" ? document.getElementById("countryCode").value + document.getElementById("phoneNumber").value : document.getElementById("email").value;
-
-            let requestBody = {
-                platform: document.getElementById("platform").value,
-                serviceType: document.getElementById("serviceType").value,
-                quantity: document.getElementById("quantity").value,
-                contactInfo: contactInfo,
-                firstName: document.getElementById("firstName").value.trim(),
-                lastName: document.getElementById("lastName").value.trim()
-            };
-
             document.getElementById("loading").style.display = "block";
-            await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(requestBody) });
+            await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) });
             document.getElementById("loading").style.display = "none";
             document.getElementById("successMessage").style.display = "block";
         }
