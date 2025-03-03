@@ -101,7 +101,6 @@
 
     <div id="detailsPage" class="container hidden">
         <h2>Your Contact Details 📩</h2>
-       
         <input type="text" id="contactInfo" placeholder="Enter Phone Number or Email">
         <input type="text" id="firstName" placeholder="First Name">
         <input type="text" id="lastName" placeholder="Last Name">
@@ -133,34 +132,25 @@
             document.getElementById("detailsPage").classList.remove("hidden");
         }
 
-        function toggleContactField() {
-            let contactField = document.getElementById("contactInfo");
-            contactField.classList.remove("hidden");
-        }
-
         async function submitForm() {
             let platform = document.getElementById("platform").value;
             let serviceType = document.getElementById("serviceType").value;
             let quantity = document.getElementById("quantity").value;
-            let contactType = document.getElementById("contactType").value;
             let contactInfo = document.getElementById("contactInfo").value.trim();
             let firstName = document.getElementById("firstName").value.trim();
             let lastName = document.getElementById("lastName").value.trim();
 
             // Prevent empty submissions
-            if (!platform || !serviceType || !quantity || !contactType || !contactInfo || !firstName || !lastName) {
+            if (!platform || !serviceType || !quantity || !contactInfo || !firstName || !lastName) {
                 alert("❌ Please fill in all fields before submitting.");
                 return;
             }
-
-            // Format contact info properly
-            let finalContact = contactType === "phone" ? contactInfo : contactInfo;
 
             let requestBody = { 
                 platform, 
                 serviceType, 
                 quantity, 
-                contact: finalContact, 
+                contact: contactInfo, 
                 firstName, 
                 lastName 
             };
