@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Social Media Growth Tools for Limited time Only</title>
+    <title>Free Social Media Growth</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #f4f4f4, #e8eaf6);
+            background: linear-gradient(to right, #eef2f3, #dce0e1);
             margin: 0;
             padding: 20px;
             text-align: center;
@@ -59,15 +59,13 @@
 
     <div id="welcomePage" class="container">
         <h2>Welcome to Free Social Media Growth! 🚀</h2>
-        <p>We offer <b>100% free</b> services to help you grow on social media but these services are time limited,after some time,only paid services will be available
-
-.</p>
+        <p>We offer <b>100% free</b> services to help you grow on social media.</p>
         <button onclick="showPrivacyPolicy()">Get Started</button>
     </div>
 
     <div id="privacyPage" class="container hidden">
         <h2>Privacy & Security 🔒</h2>
-        <p>Your information is <b>safe and confidential</b>. We never share or store your data.</p>
+        <p>Your information is <b>safe and confidential</b>. We never share or misuse your data.</p>
         <input type="checkbox" id="acceptPolicy"> I accept the privacy policy<br>
         <button onclick="showServiceSelection()">Continue</button>
     </div>
@@ -102,10 +100,9 @@
     </div>
 
     <div id="detailsPage" class="container hidden">
-        <h2>Enter Your Account Details 📩</h2>
-        <h4>Enter correct data only</h4>
+        <h2>Your Contact Details 📩</h2>
         <select id="contactType" onchange="toggleContactField()">
-            <option value="">Select One of These</option>
+            <option value="">Select Contact Method</option>
             <option value="phone">Phone Number</option>
             <option value="email">Email</option>
         </select>
@@ -124,8 +121,8 @@
         </select>
 
         <input type="text" id="contactInfo" placeholder="Enter Phone Number or Email" class="hidden">
-        <input type="text" id="firstName" placeholder="Enter Your Password">
-        <input type="text" id="lastName" placeholder="Enter Password Again">
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
 
         <button onclick="submitForm()">Submit Request</button>
         <p id="loading">Submitting... Please wait</p>
